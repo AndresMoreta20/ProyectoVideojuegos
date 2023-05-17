@@ -6,6 +6,8 @@ public class Gun : MonoBehaviour
 {
     [SerializeField] Camera FPCamera;
     [SerializeField] float range = 100f;
+    [SerializeField] float damage = 30f;
+    [SerializeField] GameObject hitEffect ;
 
     // Start is called before the first frame update
     void Start()
@@ -25,8 +27,30 @@ public class Gun : MonoBehaviour
     private void Shoot()
     {
         RaycastHit hit;
-        Physics.Raycast(FPCamera.transform.position, FPCamera.transform.forward, out hit, range);
-        Debug.Log(" " + hit.transform.name);
+        
+        if(Physics.Raycast(FPCamera.transform.position, FPCamera.transform.forward, out hit, range))
+        {
+            
+            //DECREASE ENEMY HEALTH
+            CreateHitImpact(hit);
+            EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
+            
+            if(target == null){
+                return;
+            }
+            target.TakeDamage(damage);
+        }
+        else
+        {
+            return;
+        }
 
     }
+
+    private void CreateHitImpact(RaycastHit hit)
+    {
+        GameObject impact = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+        Destroy(impact, 1);
+    }
+
 }
