@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Gun : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class Gun : MonoBehaviour
     [SerializeField] float damage = 30f;
     [SerializeField] GameObject hitEffect ;
     [SerializeField] Ammo ammoSlot;
+    [SerializeField] TextMeshProUGUI ammoText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -19,10 +22,18 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        DisplayAmmo();
         if(Input.GetButtonDown("Fire1"))
         {
             Shoot();
+
         }
+    }
+
+    private void DisplayAmmo()
+    {
+        int currentAmmo = ammoSlot.GetCurrentAmmo();
+        ammoText.text = "Balas: " + currentAmmo.ToString();
     }
 
     private void Shoot()
