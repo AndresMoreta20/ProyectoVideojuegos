@@ -8,13 +8,19 @@ public class Arma : MonoBehaviour {
 
 [SerializeField] Camera FPCamera;
 [SerializeField] float range = 200f;
+
 public float absorptionForce = 10f;
 public float attractionForce = 10f; 
+
 
     void Update () {
         if (Input.GetButtonDown("Fire2")) {
             RaycastHit hit;
-            if (Physics.Raycast(FPCamera.transform.position, FPCamera.transform.forward, out hit, range) && hit.collider.gameObject.name != "Terrain") {
+            
+
+            
+            if (Physics.Raycast(FPCamera.transform.position, FPCamera.transform.forward, out hit, range) 
+            && hit.collider.gameObject.name != "Terrain") {
           
 
                 Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
