@@ -21,10 +21,10 @@ public float attractionForce = 10f;
             
             if (Physics.Raycast(FPCamera.transform.position, FPCamera.transform.forward, out hit, range) 
             && hit.collider.gameObject.name != "Terrain") {
-          
+         // Debug.Log(hit.collider.gameObject.name);
 
                 Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
-                Debug.Log(rb);
+               
                 if (rb != null ) {
                    Vector3 direction = transform.position - hit.point;
                 // Se aplica una fuerza de atracción al objeto en la dirección calculada

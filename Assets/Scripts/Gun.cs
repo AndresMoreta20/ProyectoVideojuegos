@@ -41,6 +41,7 @@ public class Gun : MonoBehaviour
         
        
         if(ammoSlot.GetCurrentAmmo() > 0){
+            GetComponent<AudioSource>().Play();
             RaycastHit hit;
         
         if(Physics.Raycast(FPCamera.transform.position, FPCamera.transform.forward, out hit, range))
